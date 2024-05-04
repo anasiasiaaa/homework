@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[100];
+    printf("Введите строку: ");
+    fgets(str, 100, stdin);
+
+    char maxWord[100] = "", minWord[100] = "", temp[100];
+    int i = 0, j = 0, maxLen = 0, minLen = 100, len = strlen(str);
+
+    while (i < len) {
+        if (str[i] != ' ') {
+            j = 0;
+            while (str[i] != ' ' && str[i] != '\0') {
+                temp[j] = str[i];
+                i++;
+                j++;
+            }
+            temp[j] = '\0';
+            if (strlen(temp) > maxLen) {
+                strcpy(maxWord, temp);
+                maxLen = strlen(temp);
+            }
+            if (strlen(temp) < minLen) {
+                strcpy(minWord, temp);
+                minLen = strlen(temp);
+            }
+        }
+        i++;
+    }
+
+    i = 0;
+    j = 0;
+    char result[100];
+    while (i < len) {
+        if (strncmp(&str[i], maxWord, strlen(maxWord)) == 0) {
+            strcpy(&result[j], minWord);
+            j += strlen(minWord);
+            i += strlen(maxWord);
+        } else if (strncmp(&str[i], minWord, strlen(minWord)) == 0) {
+            strcpy(&result[j], maxWord);
+            j += strlen(maxWord);
+            i += strlen(minWord);
+        } else {
+            result[j] = str[i];
+            j++;
+            i++;
+        }
+    }
+    result[j] = '\0';
+
+    printf("Результат: %s\n", result);
+
+    return 0;
+}
