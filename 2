@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int main() {
+    char str[100];
+    int i, length;
+
+    printf("Введите строку: ");
+    scanf("%s", str);
+
+    for (length = 0; str[length] != '\0'; length++);
+
+    if (length > 5) {
+        printf("Первые три символа: ");
+        for (i = 0; i < 3; i++) {
+            printf("%c", str[i]);
+        }
+
+        printf("\nПоследние три символа: ");
+        for (i = length - 3; i < length; i++) {
+            printf("%c", str[i]);
+        }
+    } else {
+        printf("Первый символ повторен %d раз: ", length);
+        for (i = 0; i < length; i++) {
+            printf("%c", str[0]);
+        }
+    }
+
+    printf("\n");
+
+    return 0;
+}
